@@ -12,7 +12,7 @@ import LiveLandingPageEditor from './admin/LiveLandingPageEditor';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 
-type TabType = 'dashboard' | 'services' | 'payments' | 'orders' | 'settings' | 'customize';
+type TabType = 'dashboard' | 'services' | 'payments' | 'orders' | 'settings' | 'customize' | 'live-editor';
 
 const AdminPanel: React.FC = () => {
   const { theme } = useTheme();
