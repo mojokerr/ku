@@ -87,37 +87,7 @@ const LandingPage: React.FC = () => {
     }
   ], [t]);
 
-  // Enhanced features data
-  const features = useMemo(() => [
-    {
-      icon: Shield,
-      title: t('security_title'),
-      description: t('security_desc'),
-      color: 'from-blue-500 to-blue-600',
-      benefits: ['تشفير من الدرجة البنكية', 'حماية البيانات الشخصية', 'مراقبة أمنية 24/7']
-    },
-    {
-      icon: Zap,
-      title: t('speed_title'),
-      description: t('speed_desc'),
-      color: 'from-yellow-500 to-yellow-600',
-      benefits: ['إنجاز فوري للطلبات', 'معالجة سريعة للدفعات', 'دعم فني فوري']
-    },
-    {
-      icon: Award,
-      title: t('reliability_title'),
-      description: t('reliability_desc'),
-      color: 'from-green-500 to-green-600',
-      benefits: ['ضمان على جميع الخدمات', 'فريق دعم محترف', 'خبرة أكثر من 5 سنوات']
-    },
-    {
-      icon: Globe,
-      title: t('global_reach'),
-      description: t('global_reach_desc'),
-      color: 'from-purple-500 to-purple-600',
-      benefits: ['دعم متعدد القارات', 'عملات متنوعة', 'شراكات عالمية']
-    }
-  ], [t]);
+
 
   // Effects
   useEffect(() => {
@@ -708,7 +678,7 @@ const LandingPage: React.FC = () => {
                 {[
                   { label: 'الخدمات', action: () => scrollToSection('services') },
                   { label: 'المميزات', action: () => scrollToSection('features') },
-                  { label: 'آرا�� العملاء', action: () => scrollToSection('testimonials') },
+                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials') },
                   { label: 'تواصل معنا', action: () => scrollToSection('contact') },
                   { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank') }
                 ].map((link, index) => (
