@@ -158,15 +158,7 @@ const LandingPage: React.FC = () => {
     setIsModalOpen(true);
   }, []);
 
-  // Handle newsletter subscription
-  const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (newsletterEmail.trim()) {
-      setIsNewsletterSubmitted(true);
-      setNewsletterEmail('');
-      setTimeout(() => setIsNewsletterSubmitted(false), 3000);
-    }
-  }, [newsletterEmail]);
+
 
   // Loading and error states
   if (loading) {
