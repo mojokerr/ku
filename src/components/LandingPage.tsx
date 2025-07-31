@@ -35,8 +35,6 @@ const LandingPage: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isNewsletterSubmitted, setIsNewsletterSubmitted] = useState(false);
 
   // Memoized data
   const activeServices = useMemo(() => 
@@ -62,7 +60,7 @@ const LandingPage: React.FC = () => {
       role: 'مدير أعمال',
       avatar: '👨‍💼',
       rating: 5,
-      comment: 'خدمة ممتازة وسريعة، تم إنجاز طلبي في أقل من 5 دقائق. أنصح بشدة بالتعامل مع KYCtrust.',
+      comment: 'خدمة ممتازة وسريعة، تم إنجاز طلبي في أقل م�� 5 دقائق. أنصح بشدة بالتعامل مع KYCtrust.',
       date: '2024-11-15',
       verified: true
     },
