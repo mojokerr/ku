@@ -16,6 +16,13 @@ import ServicesShowcase from './ServicesShowcase';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import CounterAnimation from './CounterAnimation';
+import LazyLoadWrapper, {
+  LazyAnimatedBackground,
+  LazyAdvancedTestimonials,
+  LazyContactSection,
+  LazyFeatureShowcase,
+  LazyServicesShowcase
+} from './LazyLoadWrapper';
 
 const LandingPage: React.FC = () => {
   // Hooks
@@ -32,8 +39,6 @@ const LandingPage: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isNewsletterSubmitted, setIsNewsletterSubmitted] = useState(false);
 
   // Memoized data
   const activeServices = useMemo(() => 
@@ -51,49 +56,7 @@ const LandingPage: React.FC = () => {
     [activeServices]
   );
 
-  // Enhanced testimonials data
-  const testimonials = useMemo(() => [
-    {
-      id: 1,
-      name: 'أحمد محمد',
-      role: 'مدير أعمال',
-      avatar: '👨‍💼',
-      rating: 5,
-      comment: 'خدمة ممتازة وسريعة، تم إنجاز طلبي في أقل من 5 دقائق. أنصح بشدة بالتعامل مع KYCtrust.',
-      date: '2024-11-15',
-      verified: true
-    },
-    {
-      id: 2,
-      name: 'فاطمة السالم',
-      role: 'مؤسسة شركة',
-      avatar: '👩‍💼',
-      rating: 5,
-      comment: 'أفضل منصة للخدمات المالية، دعم فني ممتاز وأسعار مناسبة جداً.',
-      date: '2024-11-10',
-      verified: true
-    },
-    {
-      id: 3,
-      name: 'خالد العلي',
-      role: 'طالب جامعي',
-      avatar: '👨‍🎓',
-      rating: 5,
-      comment: 'سهولة في الاستخدام وأمان عالي، تعاملت معهم عدة مرات ولم أواجه أي مشكلة.',
-      date: '2024-11-08',
-      verified: true
-    },
-    {
-      id: 4,
-      name: 'مريم أحمد',
-      role: 'ربة منزل',
-      avatar: '👩‍🏫',
-      rating: 4,
-      comment: 'خدمة موثوقة وسعار معقولة، الدعم الفني يرد بسرعة.',
-      date: '2024-11-05',
-      verified: true
-    }
-  ], []);
+
 
   // Enhanced stats data
   const stats = useMemo(() => [
@@ -127,37 +90,7 @@ const LandingPage: React.FC = () => {
     }
   ], [t]);
 
-  // Enhanced features data
-  const features = useMemo(() => [
-    {
-      icon: Shield,
-      title: t('security_title'),
-      description: t('security_desc'),
-      color: 'from-blue-500 to-blue-600',
-      benefits: ['تشفير من الدرجة البنكية', 'حماية البيانات الشخصية', 'مراقبة أمنية 24/7']
-    },
-    {
-      icon: Zap,
-      title: t('speed_title'),
-      description: t('speed_desc'),
-      color: 'from-yellow-500 to-yellow-600',
-      benefits: ['إنجاز فوري للطلبات', 'معالجة سريعة للدفعات', 'دعم فني فوري']
-    },
-    {
-      icon: Award,
-      title: t('reliability_title'),
-      description: t('reliability_desc'),
-      color: 'from-green-500 to-green-600',
-      benefits: ['ضمان على جميع الخدمات', 'فريق دعم محترف', 'خبرة أكثر من 5 سنوات']
-    },
-    {
-      icon: Globe,
-      title: t('global_reach'),
-      description: t('global_reach_desc'),
-      color: 'from-purple-500 to-purple-600',
-      benefits: ['دعم متعدد القارات', 'عملات متنوعة', 'شراكات عالمية']
-    }
-  ], [t]);
+
 
   // Effects
   useEffect(() => {
@@ -199,15 +132,7 @@ const LandingPage: React.FC = () => {
     setIsModalOpen(true);
   }, []);
 
-  // Handle newsletter subscription
-  const handleNewsletterSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    if (newsletterEmail.trim()) {
-      setIsNewsletterSubmitted(true);
-      setNewsletterEmail('');
-      setTimeout(() => setIsNewsletterSubmitted(false), 3000);
-    }
-  }, [newsletterEmail]);
+
 
   // Loading and error states
   if (loading) {
@@ -358,18 +283,9 @@ const LandingPage: React.FC = () => {
       {/* Enhanced Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center pt-20">
         {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className={`absolute inset-0 ${
-            theme === 'dark' 
-              ? 'bg-gradient-to-br from-gray-900 via-blue-900/20 to-indigo-900/20' 
-              : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-          }`} />
-          
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500" />
-        </div>
+        <LazyLoadWrapper fallback={<div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20" />}>
+          <LazyAnimatedBackground variant="hero" />
+        </LazyLoadWrapper>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -454,75 +370,50 @@ const LandingPage: React.FC = () => {
 
             {/* Visual Element */}
             <div className="relative">
-              {/* Dashboard Preview */}
+              {/* Feature Highlights */}
               <div className={`relative p-8 rounded-3xl shadow-2xl backdrop-blur-sm border transform hover:scale-105 transition-all duration-500 ${
-                theme === 'dark' 
-                  ? 'bg-gray-800/50 border-gray-700/50' 
+                theme === 'dark'
+                  ? 'bg-gray-800/50 border-gray-700/50'
                   : 'bg-white/50 border-gray-200/50'
               }`}>
-                {/* Mini Dashboard */}
                 <div className="space-y-6">
                   {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-reverse space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                        <Shield className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          لوحة التحكم
-                        </h3>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          إدارة شاملة
-                        </p>
-                      </div>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Shield className="h-8 w-8 text-white" />
                     </div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                      {t('trusted_platform')}
+                    </h3>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {t('security_title')}
+                    </p>
                   </div>
 
-                  {/* Stats Grid */}
+                  {/* Features Grid */}
                   <div className="grid grid-cols-2 gap-4">
-                    {stats.slice(0, 4).map((stat, index) => (
+                    {[
+                      { icon: Shield, title: t('security_title'), desc: t('security_desc'), color: 'blue' },
+                      { icon: Zap, title: t('speed_title'), desc: t('speed_desc'), color: 'orange' },
+                      { icon: Target, title: t('reliability_title'), desc: t('reliability_desc'), color: 'green' },
+                      { icon: Globe, title: t('global_reach'), desc: t('global_reach_desc'), color: 'purple' }
+                    ].map((feature, index) => (
                       <div key={index} className={`p-4 rounded-xl ${
                         theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50/50'
                       }`}>
-                        <div className="flex items-center space-x-reverse space-x-2 mb-2">
-                          <stat.icon className="h-4 w-4 text-blue-600" />
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {stat.label}
-                          </span>
-                        </div>
-                        <div className={`text-lg font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          <CounterAnimation
-                            value={stat.value}
-                            prefix={stat.prefix}
-                            suffix={stat.suffix}
-                          />
-                        </div>
+                        <feature.icon className={`h-6 w-6 mb-2 ${
+                          feature.color === 'blue' ? 'text-blue-500' :
+                          feature.color === 'orange' ? 'text-orange-500' :
+                          feature.color === 'green' ? 'text-green-500' : 'text-purple-500'
+                        }`} />
+                        <h4 className={`text-sm font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                          {feature.title}
+                        </h4>
+                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {feature.desc}
+                        </p>
                       </div>
                     ))}
-                  </div>
-
-                  {/* Recent Activity */}
-                  <div className={`p-4 rounded-xl ${
-                    theme === 'dark' ? 'bg-gray-700/30' : 'bg-gray-50/30'
-                  }`}>
-                    <h4 className={`text-sm font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                      النشاط الأخير
-                    </h4>
-                    <div className="space-y-2">
-                      {[1,2,3].map(i => (
-                        <div key={i} className="flex items-center space-x-reverse space-x-3">
-                          <div className="w-2 h-2 bg-green-400 rounded-full" />
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            طلب جديد تم إنجازه بنجاح
-                          </span>
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                            {i}م
-                          </span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
 
@@ -673,7 +564,7 @@ const LandingPage: React.FC = () => {
 
                   {/* Features */}
                   <div className="space-y-2 pt-4">
-                    {['تنفيذ فوري', 'أمان عالي', 'دعم 24/7'].map((feature, idx) => (
+                    {['تنفيذ فوري', 'أمان عالي', 'د��م 24/7'].map((feature, idx) => (
                       <div key={idx} className="flex items-center space-x-reverse space-x-2">
                         <CheckSquare className="h-4 w-4 text-green-500" />
                         <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -704,346 +595,34 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Enhanced Features Section */}
-      <section id="features" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-6">
-              <Sparkles className="h-4 w-4 text-purple-600 ml-2" />
-              <span className="text-purple-600 font-medium text-sm">مميزاتنا</span>
-            </div>
-            
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 ${
-              theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`}>
-              لماذا <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                نحن الأفضل؟
-              </span>
-            </h2>
-            
-            <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              نجمع بين الأمان والسرعة والموثوقية لنقدم لك أفضل تجربة في الخدمات المالية
-            </p>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`group p-8 rounded-3xl border transition-all duration-500 hover:shadow-2xl ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800/30 border-gray-700/30' 
-                    : 'bg-white/30 border-gray-200/30'
-                } backdrop-blur-sm`}
-              >
-                {/* Feature Icon */}
-                <div className="flex items-start space-x-reverse space-x-6">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="h-8 w-8 text-white" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <h3 className={`text-xl font-bold mb-4 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      {feature.title}
-                    </h3>
-                    
-                    <p className={`text-sm leading-relaxed mb-6 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      {feature.description}
-                    </p>
-
-                    {/* Benefits List */}
-                    <div className="space-y-3">
-                      {feature.benefits.map((benefit, idx) => (
-                        <div key={idx} className="flex items-center space-x-reverse space-x-3">
-                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${feature.color}`} />
-                          <span className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            {benefit}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل المميزات..." /></div>}>
+        <LazyFeatureShowcase />
+      </LazyLoadWrapper>
 
       {/* Enhanced Testimonials Section */}
-      <section id="testimonials" className={`py-20 ${
-        theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-50/50'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-full mb-6">
-              <Heart className="h-4 w-4 text-green-600 ml-2" />
-              <span className="text-green-600 font-medium text-sm">آراء العملاء</span>
-            </div>
-            
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 ${
-              theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`}>
-              ماذا يقول <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                عملاؤنا؟
-              </span>
-            </h2>
-            
-            <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              تجارب حقيقية من عملائنا الكرام حول جودة خدماتنا
-            </p>
-          </div>
-
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`group p-8 rounded-3xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800/50 border-gray-700/50' 
-                    : 'bg-white/50 border-gray-200/50'
-                } backdrop-blur-sm relative`}
-              >
-                {/* Quote Icon */}
-                <div className="absolute top-6 left-6 opacity-20">
-                  <MessageCircle className="h-12 w-12 text-blue-600" />
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center space-x-reverse space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-
-                {/* Comment */}
-                <p className={`text-lg leading-relaxed mb-6 relative z-10 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  "{testimonial.comment}"
-                </p>
-
-                {/* Customer Info */}
-                <div className="flex items-center justify-between pt-6 border-t border-gray-200/20">
-                  <div className="flex items-center space-x-reverse space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-lg">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-reverse space-x-2">
-                        <h4 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          {testimonial.name}
-                        </h4>
-                        {testimonial.verified && (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                        )}
-                      </div>
-                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {testimonial.role}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                    {new Date(testimonial.date).toLocaleDateString('ar-EG')}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <div className={`inline-flex items-center px-6 py-3 rounded-2xl ${
-              theme === 'dark' ? 'bg-gray-800/50' : 'bg-white/50'
-            } backdrop-blur-sm border border-gray-200/30 mb-6`}>
-              <div className="flex -space-x-2 ml-4">
-                {testimonials.slice(0, 3).map((t, i) => (
-                  <div key={i} className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-2 border-white flex items-center justify-center text-white text-xs">
-                    {t.avatar}
-                  </div>
-                ))}
-              </div>
-              <span className={`font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                انضم إلى +15,000 عميل راضٍ
-              </span>
-            </div>
-            
-            <button
-              onClick={() => scrollToSection('services')}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              ابدأ تجربتك الآن
-            </button>
-          </div>
-        </div>
-      </section>
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل الشهادات..." /></div>}>
+        <LazyAdvancedTestimonials className={`${
+          theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-50/50'
+        }`} />
+      </LazyLoadWrapper>
 
       {/* Enhanced Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Info */}
-            <div>
-              <div className="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-6">
-                <Phone className="h-4 w-4 text-blue-600 ml-2" />
-                <span className="text-blue-600 font-medium text-sm">تواصل معنا</span>
-              </div>
-              
-              <h2 className={`text-3xl md:text-5xl font-bold mb-6 ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
-                نحن هنا <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  لمساعدتك
-                </span>
-              </h2>
-              
-              <p className={`text-lg mb-8 ${
-                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-              }`}>
-                فريق الدعم متاح 24/7 لمساعدتك في أي استفسار أو مشكلة
-              </p>
-
-              {/* Contact Methods */}
-              <div className="space-y-6 mb-8">
-                {[
-                  { icon: Phone, label: 'هاتف', value: '+966 50 123 4567', action: 'tel:+966501234567' },
-                  { icon: Mail, label: 'بريد إلكتروني', value: 'support@kyctrust.com', action: 'mailto:support@kyctrust.com' },
-                  { icon: MessageCircle, label: 'تليجرام', value: '@kyctrust_support', action: 'https://t.me/kyctrust_support' },
-                  { icon: MapPin, label: 'العنوان', value: 'الرياض، المملكة العربية السعودية', action: '#' }
-                ].map((contact, index) => (
-                  <a
-                    key={index}
-                    href={contact.action}
-                    className={`flex items-center space-x-reverse space-x-4 p-4 rounded-xl transition-all duration-300 hover:scale-105 ${
-                      theme === 'dark' 
-                        ? 'bg-gray-800/50 hover:bg-gray-700/50' 
-                        : 'bg-gray-50/50 hover:bg-gray-100/50'
-                    } backdrop-blur-sm group`}
-                  >
-                    <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl group-hover:scale-110 transition-transform">
-                      <contact.icon className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                        {contact.label}
-                      </h4>
-                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {contact.value}
-                      </p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-
-              {/* Social Links */}
-              <div>
-                <h4 className={`font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                  تابعنا على
-                </h4>
-                <div className="flex space-x-reverse space-x-4">
-                  {[
-                    { icon: Instagram, color: 'from-pink-500 to-purple-500' },
-                    { icon: Twitter, color: 'from-blue-400 to-blue-600' },
-                    { icon: Linkedin, color: 'from-blue-600 to-blue-800' },
-                    { icon: Youtube, color: 'from-red-500 to-red-600' }
-                  ].map((social, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      className={`p-3 bg-gradient-to-r ${social.color} rounded-xl text-white hover:scale-110 transition-transform duration-300`}
-                    >
-                      <social.icon className="h-5 w-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Newsletter */}
-            <div className={`p-8 rounded-3xl border ${
-              theme === 'dark' 
-                ? 'bg-gray-800/50 border-gray-700/50' 
-                : 'bg-white/50 border-gray-200/50'
-            } backdrop-blur-sm`}>
-              <div className="text-center mb-8">
-                <h3 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                  اشترك في النشرة الإخبارية
-                </h3>
-                <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  احصل على أحدث العروض والتحديثات
-                </p>
-              </div>
-
-              {isNewsletterSubmitted ? (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h4 className={`text-lg font-semibold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                    شكراً لك!
-                  </h4>
-                  <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    تم تسجيل اشتراكك بنجاح
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleNewsletterSubmit} className="space-y-6">
-                  <div>
-                    <input
-                      type="email"
-                      value={newsletterEmail}
-                      onChange={(e) => setNewsletterEmail(e.target.value)}
-                      placeholder="أدخل بريدك الإلكتروني"
-                      className={`w-full px-4 py-4 rounded-xl border focus:ring-2 focus:ring-blue-500 transition-colors ${
-                        theme === 'dark'
-                          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
-                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                      }`}
-                      required
-                    />
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
-                  >
-                    اشتراك
-                  </button>
-                  
-                  <p className={`text-xs text-center ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                    بالاشتراك، أنت توافق على سياسة الخصوصية الخاصة بنا
-                  </p>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل معلومات التواصل..." /></div>}>
+        <LazyContactSection />
+      </LazyLoadWrapper>
 
       {/* Enhanced Footer */}
-      <footer className={`py-16 border-t ${
-        theme === 'dark' 
-          ? 'bg-gray-900 border-gray-800' 
+      <footer className={`py-20 border-t ${
+        theme === 'dark'
+          ? 'bg-gray-900 border-gray-800'
           : 'bg-gray-50 border-gray-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Company Info */}
-            <div className="md:col-span-2">
+            <div className="lg:col-span-2">
               <div className="flex items-center space-x-reverse space-x-3 mb-6">
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl shadow-lg">
                   <Shield className="h-8 w-8 text-white" />
                 </div>
                 <div>
@@ -1051,109 +630,207 @@ const LandingPage: React.FC = () => {
                     KYCtrust
                   </h3>
                   <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    منصة الخدمات المالية الموثوقة
+                    منصة الخدمات المالية الرقمية الموثوقة
                   </p>
                 </div>
               </div>
-              
-              <p className={`text-sm leading-relaxed mb-6 max-w-md ${
+
+              <p className={`text-sm leading-relaxed mb-8 max-w-lg ${
                 theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
               }`}>
-                نحن نقدم خدمات مالية رقمية آمنة وموثوقة مع أعلى معايير الجودة والحماية لعملائنا الكرام.
+                نحن نقدم خدمات مالية رقمية آمنة وموثوقة مع أعلى معايير الجودة والحماية. منصة متكاملة تجمع بين الأمان والسرعة والموثوقية لتلبية جميع احتياجاتك المالية الرقمية.
               </p>
-              
-              <div className="flex space-x-reverse space-x-4">
-                {activePaymentMethods.slice(0, 4).map((method, index) => (
-                  <div
-                    key={method.id}
-                    className={`w-12 h-8 rounded flex items-center justify-center text-xs font-bold ${
-                      theme === 'dark' ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-700'
-                    } border border-gray-200 dark:border-gray-700`}
-                  >
-                    {method.name.substring(0, 3).toUpperCase()}
-                  </div>
-                ))}
+
+              {/* Trust Indicators */}
+              <div className="mb-8">
+                <h5 className={`text-sm font-semibold mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  شركاؤنا الموثوقون
+                </h5>
+                <div className="flex flex-wrap gap-3">
+                  {activePaymentMethods.slice(0, 6).map((method, index) => (
+                    <div
+                      key={method.id}
+                      className={`px-3 py-2 rounded-lg text-xs font-bold transition-all duration-300 hover:scale-105 ${
+                        theme === 'dark'
+                          ? 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500'
+                          : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 shadow-sm'
+                      }`}
+                    >
+                      {method.name.substring(0, 8)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h5 className={`text-sm font-semibold mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  تابعنا على
+                </h5>
+                <div className="flex space-x-reverse space-x-4">
+                  {[
+                    { icon: Instagram, color: 'from-pink-500 to-purple-500', name: 'Instagram' },
+                    { icon: Twitter, color: 'from-blue-400 to-blue-600', name: 'Twitter' },
+                    { icon: Linkedin, color: 'from-blue-600 to-blue-800', name: 'LinkedIn' },
+                    { icon: Youtube, color: 'from-red-500 to-red-600', name: 'YouTube' }
+                  ].map((social, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      className={`p-3 bg-gradient-to-r ${social.color} rounded-xl text-white hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl group`}
+                      title={social.name}
+                    >
+                      <social.icon className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className={`font-semibold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+              <h4 className={`font-bold text-lg mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
                 روابط سريعة
               </h4>
               <div className="space-y-4">
                 {[
-                  { label: 'الخدمات', action: () => scrollToSection('services') },
-                  { label: 'المميزات', action: () => scrollToSection('features') },
-                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials') },
-                  { label: 'تواصل معنا', action: () => scrollToSection('contact') },
-                  { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank') }
+                  { label: 'الصفحة الرئيسية', action: () => scrollToSection('home'), icon: '🏠' },
+                  { label: 'خدماتنا', action: () => scrollToSection('services'), icon: '💼' },
+                  { label: 'مميزاتنا', action: () => scrollToSection('features'), icon: '⭐' },
+                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials'), icon: '💬' },
+                  { label: 'تواصل معنا', action: () => scrollToSection('contact'), icon: '📞' },
+                  { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank'), icon: '⚙️' }
                 ].map((link, index) => (
                   <button
                     key={index}
                     onClick={link.action}
-                    className={`block text-sm hover:text-blue-600 transition-colors ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    className={`flex items-center space-x-reverse space-x-3 text-sm hover:text-blue-600 transition-all duration-300 hover:translate-x-2 group ${
+                      theme === 'dark' ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600'
                     }`}
                   >
-                    {link.label}
+                    <span className="text-base group-hover:scale-110 transition-transform">{link.icon}</span>
+                    <span className="group-hover:font-medium transition-all">{link.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* Contact & Support */}
             <div>
-              <h4 className={`font-semibold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                معلومات التواصل
+              <h4 className={`font-bold text-lg mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                التواصل والدعم
               </h4>
               <div className="space-y-4">
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Phone className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    +966 50 123 4567
-                  </span>
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
+                    <Phone className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      +966 50 123 4567
+                    </p>
+                    <p className="text-xs text-green-500">متاح 24/7</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Mail className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    support@kyctrust.com
-                  </span>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg">
+                    <Mail className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      support@kyctrust.com
+                    </p>
+                    <p className="text-xs text-blue-500">رد خلال ساعة</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Clock className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    24/7 دعم فني
-                  </span>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-purple-500 to-violet-500 rounded-lg">
+                    <Clock className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      دعم فني متخصص
+                    </p>
+                    <p className="text-xs text-purple-500">24/7 بدون انقطاع</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
+                    <MapPin className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      الرياض، السعودية
+                    </p>
+                    <p className="text-xs text-orange-500">مكاتب معتمدة</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="mt-8 space-y-3">
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>مرخص ومُنظم</span>
+                </div>
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Shield className="h-4 w-4 text-blue-500" />
+                  <span>ISO 27001 معتمد</span>
+                </div>
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Award className="h-4 w-4 text-yellow-500" />
+                  <span>جائزة أفضل منصة 2024</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 ${
+          <div className={`pt-8 border-t ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
-            <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-              © 2024 KYCtrust. جميع الحقوق محفوظة.
-            </div>
-            
-            <div className="flex items-center space-x-reverse space-x-6 text-sm">
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                سياسة الخصوصية
-              </a>
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                شروط الاستخدام
-              </a>
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                المساعدة
-              </a>
+            <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+              {/* Copyright */}
+              <div className="flex items-center space-x-reverse space-x-4">
+                <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  © 2024 KYCtrust. جميع الحقوق محفوظة.
+                </div>
+                <div className="flex items-center space-x-reverse space-x-2 text-xs text-green-500">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span>الخدمة متاحة الآن</span>
+                </div>
+              </div>
+
+              {/* Legal Links */}
+              <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+                {[
+                  'سياسة الخصوصية',
+                  'شروط الاستخدام',
+                  'سياسة الأمان',
+                  'المساعدة',
+                  'خريطة الموقع'
+                ].map((link, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className={`hover:text-blue-600 transition-colors relative group ${
+                      theme === 'dark' ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600'
+                    }`}
+                  >
+                    {link}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                  </a>
+                ))}
+              </div>
+
+              {/* Language & Theme */}
+              <div className="flex items-center space-x-reverse space-x-4">
+                <LanguageToggle />
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
@@ -1172,11 +849,13 @@ const LandingPage: React.FC = () => {
       )}
 
       {isServicesOpen && (
-        <ServicesShowcase
-          isOpen={isServicesOpen}
-          onClose={() => setIsServicesOpen(false)}
-          onSelectService={handleOrderService}
-        />
+        <LazyLoadWrapper fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center"><LoadingSpinner size="lg" text="جاري تحميل الخدمات..." /></div>}>
+          <LazyServicesShowcase
+            isOpen={isServicesOpen}
+            onClose={() => setIsServicesOpen(false)}
+            onSelectService={handleOrderService}
+          />
+        </LazyLoadWrapper>
       )}
 
       {/* Video Modal */}

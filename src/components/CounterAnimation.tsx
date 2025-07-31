@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 interface CounterAnimationProps {
-  end: number;
+  value: number;
   duration?: number;
   suffix?: string;
   prefix?: string;
@@ -9,7 +9,7 @@ interface CounterAnimationProps {
 }
 
 const CounterAnimation: React.FC<CounterAnimationProps> = ({
-  end,
+  value: end,
   duration = 2000,
   suffix = '',
   prefix = '',

@@ -1,19 +1,17 @@
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
-interface Particle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  opacity: number;
-  color: string;
+interface AnimatedBackgroundProps {
+  variant?: 'hero' | 'section' | 'subtle';
+  className?: string;
 }
 
-const AnimatedBackground: React.FC = () => {
+const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ 
+  variant = 'subtle',
+  className = ''
+}) => {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particles = useRef<Particle[]>([]);
-  const animationId = useRef<number>();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,99 +25,120 @@ const AnimatedBackground: React.FC = () => {
       canvas.height = window.innerHeight;
     };
 
-    const createParticles = () => {
-      particles.current = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
-      
-      for (let i = 0; i < particleCount; i++) {
-        particles.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.5 + 0.2,
-          color: `hsl(${Math.random() * 60 + 200}, 70%, 60%)`, // Blue to purple range
-        });
-      }
-    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Particle system for dynamic background
+    const particles: Array<{
+      x: number;
+      y: number;
+      dx: number;
+      dy: number;
+      size: number;
+      opacity: number;
+      color: string;
+    }> = [];
+
+    const colors = theme === 'dark' 
+      ? ['rgba(59, 130, 246, 0.1)', 'rgba(147, 51, 234, 0.1)', 'rgba(236, 72, 153, 0.1)']
+      : ['rgba(59, 130, 246, 0.05)', 'rgba(147, 51, 234, 0.05)', 'rgba(236, 72, 153, 0.05)'];
+
+    // Initialize particles
+    const particleCount = variant === 'hero' ? 50 : variant === 'section' ? 30 : 20;
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.5 + 0.1,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and draw particles
-      particles.current.forEach((particle, index) => {
+
+      particles.forEach((particle, index) => {
         // Update position
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        
+        particle.x += particle.dx;
+        particle.y += particle.dy;
+
         // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-        
-        // Keep particles in bounds
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y));
-        
+        if (particle.x < 0 || particle.x > canvas.width) particle.dx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.dy *= -1;
+
         // Draw particle
-        ctx.save();
-        ctx.globalAlpha = particle.opacity;
-        ctx.fillStyle = particle.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = particle.color;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
         ctx.fill();
-        ctx.restore();
-        
-        // Draw connections to nearby particles
-        particles.current.slice(index + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 150) {
-            ctx.save();
-            ctx.globalAlpha = (1 - distance / 150) * 0.2;
-            ctx.strokeStyle = particle.color;
-            ctx.lineWidth = 0.5;
+
+        // Connect nearby particles
+        particles.slice(index + 1).forEach(otherParticle => {
+          const distance = Math.sqrt(
+            Math.pow(particle.x - otherParticle.x, 2) + 
+            Math.pow(particle.y - otherParticle.y, 2)
+          );
+
+          if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.strokeStyle = theme === 'dark' 
+              ? `rgba(59, 130, 246, ${0.1 * (1 - distance / 100)})` 
+              : `rgba(59, 130, 246, ${0.05 * (1 - distance / 100)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
-            ctx.restore();
           }
         });
       });
-      
-      animationId.current = requestAnimationFrame(animate);
+
+      requestAnimationFrame(animate);
     };
 
-    resizeCanvas();
-    createParticles();
     animate();
 
-    const handleResize = () => {
-      resizeCanvas();
-      createParticles();
-    };
-
-    window.addEventListener('resize', handleResize);
-
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animationId.current) {
-        cancelAnimationFrame(animationId.current);
-      }
+      window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [theme, variant]);
+
+  const getVariantClasses = () => {
+    switch (variant) {
+      case 'hero':
+        return 'opacity-40';
+      case 'section':
+        return 'opacity-20';
+      default:
+        return 'opacity-10';
+    }
+  };
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: -1 }}
-    />
+    <div className={`absolute inset-0 overflow-hidden ${className}`}>
+      <canvas
+        ref={canvasRef}
+        className={`absolute inset-0 ${getVariantClasses()}`}
+        style={{ pointerEvents: 'none' }}
+      />
+      
+      {/* Gradient overlays */}
+      <div className={`absolute inset-0 ${
+        theme === 'dark' 
+          ? 'bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20' 
+          : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
+      }`} />
+      
+      {/* Floating geometric shapes */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl animate-float delay-1000" />
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl animate-bounce-slow" />
+        <div className="absolute bottom-1/3 right-1/4 w-36 h-36 bg-pink-500/10 rounded-full blur-2xl animate-pulse-slow" />
+      </div>
+    </div>
   );
 };
 

@@ -19,12 +19,33 @@ export const translations = {
     heroButton1: 'ابدأ رحلتك معنا',
     heroButton2: 'استكشف خدماتنا',
     leadingPlatform: 'منصة رائدة في الخدمات المالية الرقمية',
+    hero_title: 'مستقبل الخدمات',
+    hero_title_gradient: 'المالية الرقمية',
+    hero_subtitle: 'نحن نعيد تعريف الخدمات المالية الرقمية من خلال تقديم حلول مبتكرة وآمنة ومتطورة',
+    get_started: 'ابدأ الآن',
+    explore_services: 'استكشف الخدمات',
+    hero_badge: '🎉 منصة رائدة في الخدمات المالية',
+    start_now: 'ابدأ الآن',
+    trusted_platform: 'منصة موثوقة',
     
     // Stats
     satisfiedClients: 'عميل راضٍ',
     successRate: 'معدل النجاح',
     support247: 'دعم متواصل',
     executionSpeed: 'سرعة التنفيذ',
+    satisfied_customers: 'عميل راضٍ',
+    success_rate: 'معدل النجاح',
+    support_hours: 'دعم متواصل',
+    avg_completion_time: 'متوسط وقت الإنجاز',
+    security_title: 'أمان متقدم',
+    security_desc: 'تشفير من الدرجة البنكية وحماية شاملة',
+    speed_title: 'سرعة فائقة',
+    speed_desc: 'معالجة فورية في أقل من 5 دقائق',
+    reliability_title: 'موثوقية عالية',
+    reliability_desc: 'ضمان الجودة والخدمة المتميزة',
+    global_reach: 'تغطية عالمية',
+    global_reach_desc: 'خدماتنا متاحة في أكثر من 150 دولة',
+    testimonials: 'آراء العملاء',
     
     // Services Section
     ourExcellentServices: 'خدماتنا المتميزة',
@@ -41,7 +62,7 @@ export const translations = {
     // Features Section
     whyWeAre: 'لماذا نحن',
     theBest: 'الأفضل؟',
-    featuresDescription: 'نتميز بمجموعة من الخصائص التي تجعلنا الخيار الأول للخدمات المالية الرقمية',
+    featuresDescription: 'نتميز بمجموعة من الخصائص التي تجعلنا الخيار الأول للخد��ات المالية الرقمية',
     advancedSecurity: 'أمان متقدم',
     securityDescription: 'تشفير متقدم وحماية شاملة لجميع معاملاتك المالية',
     lightningSpeed: 'سرعة البرق',
@@ -62,7 +83,7 @@ export const translations = {
     fullySecuredEncrypted: 'آمن ومشفر بالكامل',
     
     // Testimonials
-    whatOur: 'ماذا يقول',
+    whatOur: 'ماذا ي��ول',
     clientsSay: 'عملاؤنا',
     testimonialsDescription: 'آرا�� حقيقية من عملائنا الذين اختبروا خدماتنا المتميزة',
     
@@ -135,7 +156,7 @@ export const translations = {
     pricing: 'Pricing',
     blog: 'Blog',
     help: 'Help',
-    
+
     // Hero Section
     heroTitle: 'Future of Digital',
     heroTitleGradient: 'Financial Services',
@@ -143,12 +164,33 @@ export const translations = {
     heroButton1: 'Start Your Journey',
     heroButton2: 'Explore Services',
     leadingPlatform: 'Leading platform in digital financial services',
-    
+    hero_title: 'Future of Digital',
+    hero_title_gradient: 'Financial Services',
+    hero_subtitle: 'We are redefining digital financial services by providing innovative, secure, and advanced solutions',
+    get_started: 'Get Started',
+    explore_services: 'Explore Services',
+    hero_badge: '🎉 Leading Financial Services Platform',
+    start_now: 'Start Now',
+    trusted_platform: 'Trusted Platform',
+
     // Stats
     satisfiedClients: 'Satisfied Clients',
     successRate: 'Success Rate',
     support247: '24/7 Support',
     executionSpeed: 'Execution Speed',
+    satisfied_customers: 'Satisfied Customers',
+    success_rate: 'Success Rate',
+    support_hours: 'Continuous Support',
+    avg_completion_time: 'Average Completion Time',
+    security_title: 'Advanced Security',
+    security_desc: 'Bank-grade encryption and comprehensive protection',
+    speed_title: 'Lightning Speed',
+    speed_desc: 'Instant processing in less than 5 minutes',
+    reliability_title: 'High Reliability',
+    reliability_desc: 'Quality guarantee and exceptional service',
+    global_reach: 'Global Reach',
+    global_reach_desc: 'Our services are available in 150+ countries',
+    testimonials: 'Testimonials',
     
     // Services Section
     ourExcellentServices: 'Our Excellent Services',
@@ -161,6 +203,7 @@ export const translations = {
     instantProcessing: 'Instant Processing',
     highSecurity: 'High Security',
     support24: '24/7 Support',
+    our_services: 'Our Services',
     
     // Features Section
     whyWeAre: 'Why We Are',
