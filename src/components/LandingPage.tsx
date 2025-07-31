@@ -414,7 +414,7 @@ const LandingPage: React.FC = () => {
                           لوحة التحكم
                         </h3>
                         <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          إ��ارة شاملة
+                          إدارة شاملة
                         </p>
                       </div>
                     </div>
@@ -645,78 +645,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Enhanced Features Section */}
-      <section id="features" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-6">
-              <Sparkles className="h-4 w-4 text-purple-600 ml-2" />
-              <span className="text-purple-600 font-medium text-sm">مميزاتنا</span>
-            </div>
-            
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 ${
-              theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`}>
-              لماذا <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                نحن الأفضل؟
-              </span>
-            </h2>
-            
-            <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              نجمع بين الأمان والسرعة والموثوقية لنقدم لك أفضل تجربة في الخدمات المالية
-            </p>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`group p-8 rounded-3xl border transition-all duration-500 hover:shadow-2xl ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800/30 border-gray-700/30' 
-                    : 'bg-white/30 border-gray-200/30'
-                } backdrop-blur-sm`}
-              >
-                {/* Feature Icon */}
-                <div className="flex items-start space-x-reverse space-x-6">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="h-8 w-8 text-white" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <h3 className={`text-xl font-bold mb-4 ${
-                      theme === 'dark' ? 'text-white' : 'text-gray-900'
-                    }`}>
-                      {feature.title}
-                    </h3>
-                    
-                    <p className={`text-sm leading-relaxed mb-6 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      {feature.description}
-                    </p>
-
-                    {/* Benefits List */}
-                    <div className="space-y-3">
-                      {feature.benefits.map((benefit, idx) => (
-                        <div key={idx} className="flex items-center space-x-reverse space-x-3">
-                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${feature.color}`} />
-                          <span className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            {benefit}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureShowcase />
 
       {/* Enhanced Testimonials Section */}
       <AdvancedTestimonials className={`${
@@ -745,7 +674,7 @@ const LandingPage: React.FC = () => {
                     KYCtrust
                   </h3>
                   <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    منصة الخدم��ت المالية الموثوقة
+                    منصة الخدمات المالية الموثوقة
                   </p>
                 </div>
               </div>
@@ -779,7 +708,7 @@ const LandingPage: React.FC = () => {
                 {[
                   { label: 'الخدمات', action: () => scrollToSection('services') },
                   { label: 'المميزات', action: () => scrollToSection('features') },
-                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials') },
+                  { label: 'آرا�� العملاء', action: () => scrollToSection('testimonials') },
                   { label: 'تواصل معنا', action: () => scrollToSection('contact') },
                   { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank') }
                 ].map((link, index) => (
