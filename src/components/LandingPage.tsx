@@ -19,6 +19,7 @@ import CounterAnimation from './CounterAnimation';
 import AnimatedBackground from './AnimatedBackground';
 import AdvancedTestimonials from './AdvancedTestimonials';
 import ContactSection from './ContactSection';
+import FeatureShowcase from './FeatureShowcase';
 
 const LandingPage: React.FC = () => {
   // Hooks
@@ -413,7 +414,7 @@ const LandingPage: React.FC = () => {
                           لوحة التحكم
                         </h3>
                         <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          إدارة شاملة
+                          إ��ارة شاملة
                         </p>
                       </div>
                     </div>
@@ -744,7 +745,7 @@ const LandingPage: React.FC = () => {
                     KYCtrust
                   </h3>
                   <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    منصة الخدمات المالية الموثوقة
+                    منصة الخدم��ت المالية الموثوقة
                   </p>
                 </div>
               </div>
