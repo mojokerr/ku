@@ -359,18 +359,7 @@ const LandingPage: React.FC = () => {
       {/* Enhanced Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center pt-20">
         {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className={`absolute inset-0 ${
-            theme === 'dark' 
-              ? 'bg-gradient-to-br from-gray-900 via-blue-900/20 to-indigo-900/20' 
-              : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-          }`} />
-          
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500" />
-        </div>
+        <AnimatedBackground variant="hero" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
