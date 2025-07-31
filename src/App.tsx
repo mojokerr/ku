@@ -17,7 +17,14 @@ function App() {
             <Router>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/admin" element={<AdminPanel />} />
+                <Route
+                  path="/admin"
+                  element={
+                    <Suspense fallback={<LoadingSpinner size="lg" text="جاري تحميل لوحة التحكم..." />}>
+                      <LazyAdminPanel />
+                    </Suspense>
+                  }
+                />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Router>
