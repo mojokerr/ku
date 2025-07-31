@@ -11,6 +11,8 @@ import ServicesManager from './admin/ServicesManager';
 import PaymentMethodsManager from './admin/PaymentMethodsManager';
 import OrdersManager from './admin/OrdersManager';
 import SiteSettingsManager from './admin/SiteSettingsManager';
+import SystemSettingsManager from './admin/SystemSettingsManager';
+import SecurityManager from './admin/SecurityManager';
 import LandingPageCustomizer from './admin/LandingPageCustomizer';
 import LiveLandingPageEditor from './admin/LiveLandingPageEditor';
 import AnalyticsPanel from './admin/AnalyticsPanel';
@@ -71,7 +73,7 @@ const AdminPanel: React.FC = () => {
     { id: 'live-editor' as TabType, name: 'المحرر المباشر', icon: Layout, category: 'content' },
     { id: 'services' as TabType, name: 'إدارة الخدمات', icon: Package, category: 'content' },
     { id: 'orders' as TabType, name: 'الطلبات', icon: Inbox, category: 'operations', badge: orders.filter(o => !o.archived).length },
-    { id: 'users' as TabType, name: 'إدارة المستخدمين', icon: Users, category: 'operations' },
+    { id: 'users' as TabType, name: 'إ��ارة المستخدمين', icon: Users, category: 'operations' },
     { id: 'payments' as TabType, name: 'طرق الدفع', icon: CreditCard, category: 'operations' },
     { id: 'reports' as TabType, name: 'التقارير', icon: FileText, category: 'analytics' },
     { id: 'customize' as TabType, name: 'تخصيص الصفحة', icon: Palette, category: 'settings' },
@@ -202,7 +204,7 @@ const AdminPanel: React.FC = () => {
                     ? 'text-gray-300 hover:text-white hover:bg-gray-700'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 }`}
-                title="تحديث البيا��ات"
+                title="تحديث البيانات"
               >
                 <RefreshCw className="h-5 w-5" />
               </button>
@@ -402,7 +404,7 @@ const AdminPanel: React.FC = () => {
                       <p className={`text-xs ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
                       }`}>
-                        جمي�� الخدمات تعمل بشكل طبيعي
+                        جميع الخدمات تعمل بشكل طبيعي
                       </p>
                     </div>
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
