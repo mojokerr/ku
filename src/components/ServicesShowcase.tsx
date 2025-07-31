@@ -178,15 +178,15 @@ const ServicesShowcase: React.FC<ServicesShowcaseProps> = ({
               </div>
               <div>
                 <h2 className={`text-3xl font-bold ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {t('ourServices')}
-                </h2>
-                <p className={`mt-2 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-                }`}>
-                  {t('servicesDescription')}
-                </p>
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                خدماتنا المتميزة
+              </h2>
+              <p className={`mt-2 ${
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                نقدم مجموعة شاملة من الخدمات المالية الرقمية المصممة خصيصاً لتلبية احتياجاتك
+              </p>
               </div>
             </div>
             
