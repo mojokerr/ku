@@ -353,7 +353,7 @@ const LandingPage: React.FC = () => {
                     ))}
                   </div>
                   <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <span className="font-semibold">15,000+</span> عم��ل راضٍ
+                    <span className="font-semibold">15,000+</span> عميل راضٍ
                   </div>
                 </div>
                 
@@ -460,7 +460,7 @@ const LandingPage: React.FC = () => {
           {heroData.showStats && (
             <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { value: heroData.statsData.clients, label: 'عميل ��اضٍ', icon: Users },
+                { value: heroData.statsData.clients, label: 'عميل راضٍ', icon: Users },
                 { value: heroData.statsData.successRate, label: 'معدل النجاح', icon: Target },
                 { value: heroData.statsData.support, label: 'دعم متواصل', icon: Clock },
                 { value: heroData.statsData.speed, label: 'سرعة التنفيذ', icon: Zap }
@@ -620,15 +620,21 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Enhanced Features Section */}
-      <FeatureShowcase />
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل المميزات..." /></div>}>
+        <LazyFeatureShowcase />
+      </LazyLoadWrapper>
 
       {/* Enhanced Testimonials Section */}
-      <AdvancedTestimonials className={`${
-        theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-50/50'
-      }`} />
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل الشهادات..." /></div>}>
+        <LazyAdvancedTestimonials className={`${
+          theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-50/50'
+        }`} />
+      </LazyLoadWrapper>
 
       {/* Enhanced Contact Section */}
-      <ContactSection />
+      <LazyLoadWrapper fallback={<div className="py-20 text-center"><LoadingSpinner size="lg" text="جاري تحميل معلومات التواصل..." /></div>}>
+        <LazyContactSection />
+      </LazyLoadWrapper>
 
       {/* Enhanced Footer */}
       <footer className={`py-20 border-t ${
@@ -830,7 +836,7 @@ const LandingPage: React.FC = () => {
                   'شروط الاستخدام',
                   'سياسة الأمان',
                   'المساعدة',
-                  'خريطة المو��ع'
+                  'خريطة الموقع'
                 ].map((link, index) => (
                   <a
                     key={index}
