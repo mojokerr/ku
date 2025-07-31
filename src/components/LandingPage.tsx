@@ -233,7 +233,7 @@ const LandingPage: React.FC = () => {
       clients: '15000+',
       successRate: '99.9%',
       support: '24/7',
-      speed: '< 5 دقائ��'
+      speed: '< 5 دقائق'
     }
   };
 
@@ -770,117 +770,9 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section id="testimonials" className={`py-20 ${
+      <AdvancedTestimonials className={`${
         theme === 'dark' ? 'bg-gray-800/50' : 'bg-gray-50/50'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-full mb-6">
-              <Heart className="h-4 w-4 text-green-600 ml-2" />
-              <span className="text-green-600 font-medium text-sm">آراء العملاء</span>
-            </div>
-            
-            <h2 className={`text-3xl md:text-5xl font-bold mb-6 ${
-              theme === 'dark' ? 'text-white' : 'text-gray-900'
-            }`}>
-              ماذا يقول <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                عملاؤنا؟
-              </span>
-            </h2>
-            
-            <p className={`text-lg md:text-xl max-w-3xl mx-auto ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              تجارب حقيقية من عملائنا الكرام حول جودة خدماتنا
-            </p>
-          </div>
-
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`group p-8 rounded-3xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-                  theme === 'dark' 
-                    ? 'bg-gray-800/50 border-gray-700/50' 
-                    : 'bg-white/50 border-gray-200/50'
-                } backdrop-blur-sm relative`}
-              >
-                {/* Quote Icon */}
-                <div className="absolute top-6 left-6 opacity-20">
-                  <MessageCircle className="h-12 w-12 text-blue-600" />
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center space-x-reverse space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-
-                {/* Comment */}
-                <p className={`text-lg leading-relaxed mb-6 relative z-10 ${
-                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  "{testimonial.comment}"
-                </p>
-
-                {/* Customer Info */}
-                <div className="flex items-center justify-between pt-6 border-t border-gray-200/20">
-                  <div className="flex items-center space-x-reverse space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-lg">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-reverse space-x-2">
-                        <h4 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          {testimonial.name}
-                        </h4>
-                        {testimonial.verified && (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                        )}
-                      </div>
-                      <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {testimonial.role}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                    {new Date(testimonial.date).toLocaleDateString('ar-EG')}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center mt-16">
-            <div className={`inline-flex items-center px-6 py-3 rounded-2xl ${
-              theme === 'dark' ? 'bg-gray-800/50' : 'bg-white/50'
-            } backdrop-blur-sm border border-gray-200/30 mb-6`}>
-              <div className="flex -space-x-2 ml-4">
-                {testimonials.slice(0, 3).map((t, i) => (
-                  <div key={i} className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full border-2 border-white flex items-center justify-center text-white text-xs">
-                    {t.avatar}
-                  </div>
-                ))}
-              </div>
-              <span className={`font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                انضم إلى +15,000 عميل راضٍ
-              </span>
-            </div>
-            
-            <button
-              onClick={() => scrollToSection('services')}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              ابدأ تجربتك الآن
-            </button>
-          </div>
-        </div>
-      </section>
+      }`} />
 
       {/* Enhanced Contact Section */}
       <section id="contact" className="py-20">
