@@ -34,6 +34,7 @@ const AdminPanel: React.FC = () => {
 
   const tabs = [
     { id: 'dashboard' as TabType, name: 'لوحة التحكم', icon: Shield },
+    { id: 'live-editor' as TabType, name: 'المحرر المباشر', icon: Layout },
     { id: 'services' as TabType, name: 'إدارة الخدمات', icon: Package },
     { id: 'payments' as TabType, name: 'طرق الدفع', icon: CreditCard },
     { id: 'orders' as TabType, name: 'الطلبات', icon: Inbox },
