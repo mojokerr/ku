@@ -626,17 +626,17 @@ const LandingPage: React.FC = () => {
       <ContactSection />
 
       {/* Enhanced Footer */}
-      <footer className={`py-16 border-t ${
-        theme === 'dark' 
-          ? 'bg-gray-900 border-gray-800' 
+      <footer className={`py-20 border-t ${
+        theme === 'dark'
+          ? 'bg-gray-900 border-gray-800'
           : 'bg-gray-50 border-gray-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Company Info */}
-            <div className="md:col-span-2">
+            <div className="lg:col-span-2">
               <div className="flex items-center space-x-reverse space-x-3 mb-6">
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl shadow-lg">
                   <Shield className="h-8 w-8 text-white" />
                 </div>
                 <div>
@@ -644,109 +644,207 @@ const LandingPage: React.FC = () => {
                     KYCtrust
                   </h3>
                   <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    منصة الخدمات المالية الموثوقة
+                    منصة الخدمات المالية الرقمية الموثوقة
                   </p>
                 </div>
               </div>
-              
-              <p className={`text-sm leading-relaxed mb-6 max-w-md ${
+
+              <p className={`text-sm leading-relaxed mb-8 max-w-lg ${
                 theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
               }`}>
-                نحن نقدم خدمات مالية رقمية آمنة وموثوقة مع أعلى معايير الجودة والحماية لعملائنا الكرام.
+                نحن نقدم خدمات مالية رقمية آمنة وموثوقة مع أعلى معايير الجودة والحماية. منصة متكاملة تجمع بين الأمان والسرعة والموثوقية لتلبية جميع احتياجاتك المالية الرقمية.
               </p>
-              
-              <div className="flex space-x-reverse space-x-4">
-                {activePaymentMethods.slice(0, 4).map((method, index) => (
-                  <div
-                    key={method.id}
-                    className={`w-12 h-8 rounded flex items-center justify-center text-xs font-bold ${
-                      theme === 'dark' ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-700'
-                    } border border-gray-200 dark:border-gray-700`}
-                  >
-                    {method.name.substring(0, 3).toUpperCase()}
-                  </div>
-                ))}
+
+              {/* Trust Indicators */}
+              <div className="mb-8">
+                <h5 className={`text-sm font-semibold mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  شركاؤنا الموثوقون
+                </h5>
+                <div className="flex flex-wrap gap-3">
+                  {activePaymentMethods.slice(0, 6).map((method, index) => (
+                    <div
+                      key={method.id}
+                      className={`px-3 py-2 rounded-lg text-xs font-bold transition-all duration-300 hover:scale-105 ${
+                        theme === 'dark'
+                          ? 'bg-gray-800 text-gray-300 border border-gray-700 hover:border-blue-500'
+                          : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 shadow-sm'
+                      }`}
+                    >
+                      {method.name.substring(0, 8)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div>
+                <h5 className={`text-sm font-semibold mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  تابعنا على
+                </h5>
+                <div className="flex space-x-reverse space-x-4">
+                  {[
+                    { icon: Instagram, color: 'from-pink-500 to-purple-500', name: 'Instagram' },
+                    { icon: Twitter, color: 'from-blue-400 to-blue-600', name: 'Twitter' },
+                    { icon: Linkedin, color: 'from-blue-600 to-blue-800', name: 'LinkedIn' },
+                    { icon: Youtube, color: 'from-red-500 to-red-600', name: 'YouTube' }
+                  ].map((social, index) => (
+                    <a
+                      key={index}
+                      href="#"
+                      className={`p-3 bg-gradient-to-r ${social.color} rounded-xl text-white hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-xl group`}
+                      title={social.name}
+                    >
+                      <social.icon className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className={`font-semibold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+              <h4 className={`font-bold text-lg mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
                 روابط سريعة
               </h4>
               <div className="space-y-4">
                 {[
-                  { label: 'الخدمات', action: () => scrollToSection('services') },
-                  { label: 'المميزات', action: () => scrollToSection('features') },
-                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials') },
-                  { label: 'تواصل معنا', action: () => scrollToSection('contact') },
-                  { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank') }
+                  { label: 'الصفحة الرئيسية', action: () => scrollToSection('home'), icon: '🏠' },
+                  { label: 'خدماتنا', action: () => scrollToSection('services'), icon: '💼' },
+                  { label: 'مميزاتنا', action: () => scrollToSection('features'), icon: '⭐' },
+                  { label: 'آراء العملاء', action: () => scrollToSection('testimonials'), icon: '💬' },
+                  { label: 'تواصل معنا', action: () => scrollToSection('contact'), icon: '📞' },
+                  { label: 'لوحة التحكم', action: () => window.open('/admin', '_blank'), icon: '⚙️' }
                 ].map((link, index) => (
                   <button
                     key={index}
                     onClick={link.action}
-                    className={`block text-sm hover:text-blue-600 transition-colors ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    className={`flex items-center space-x-reverse space-x-3 text-sm hover:text-blue-600 transition-all duration-300 hover:translate-x-2 group ${
+                      theme === 'dark' ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600'
                     }`}
                   >
-                    {link.label}
+                    <span className="text-base group-hover:scale-110 transition-transform">{link.icon}</span>
+                    <span className="group-hover:font-medium transition-all">{link.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* Contact & Support */}
             <div>
-              <h4 className={`font-semibold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                معلومات التواصل
+              <h4 className={`font-bold text-lg mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                التواصل والدعم
               </h4>
               <div className="space-y-4">
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Phone className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    +966 50 123 4567
-                  </span>
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
+                    <Phone className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      +966 50 123 4567
+                    </p>
+                    <p className="text-xs text-green-500">متاح 24/7</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Mail className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    support@kyctrust.com
-                  </span>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg">
+                    <Mail className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      support@kyctrust.com
+                    </p>
+                    <p className="text-xs text-blue-500">رد خلال ساعة</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-reverse space-x-3">
-                  <Clock className="h-4 w-4 text-blue-600" />
-                  <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    24/7 دعم فني
-                  </span>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-purple-500 to-violet-500 rounded-lg">
+                    <Clock className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      دعم فني متخصص
+                    </p>
+                    <p className="text-xs text-purple-500">24/7 بدون انقطاع</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-reverse space-x-3 group">
+                  <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
+                    <MapPin className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      الرياض، السعودية
+                    </p>
+                    <p className="text-xs text-orange-500">مكاتب معتمدة</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="mt-8 space-y-3">
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <span>مرخص ومُنظم</span>
+                </div>
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Shield className="h-4 w-4 text-blue-500" />
+                  <span>ISO 27001 معتمد</span>
+                </div>
+                <div className={`flex items-center space-x-reverse space-x-2 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Award className="h-4 w-4 text-yellow-500" />
+                  <span>جائزة أفضل منصة 2024</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 ${
+          <div className={`pt-8 border-t ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
-            <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-              © 2024 KYCtrust. جميع الحقوق محفوظة.
-            </div>
-            
-            <div className="flex items-center space-x-reverse space-x-6 text-sm">
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                سياسة الخصوصية
-              </a>
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                شروط الاستخدام
-              </a>
-              <a href="#" className={`hover:text-blue-600 transition-colors ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                المساعدة
-              </a>
+            <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+              {/* Copyright */}
+              <div className="flex items-center space-x-reverse space-x-4">
+                <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  © 2024 KYCtrust. جميع الحقوق محفوظة.
+                </div>
+                <div className="flex items-center space-x-reverse space-x-2 text-xs text-green-500">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  <span>الخدمة متاحة الآن</span>
+                </div>
+              </div>
+
+              {/* Legal Links */}
+              <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+                {[
+                  'سياسة الخصوصية',
+                  'شروط الاستخدام',
+                  'سياسة الأمان',
+                  'المساعدة',
+                  'خريطة الموقع'
+                ].map((link, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className={`hover:text-blue-600 transition-colors relative group ${
+                      theme === 'dark' ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600'
+                    }`}
+                  >
+                    {link}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                  </a>
+                ))}
+              </div>
+
+              {/* Language & Theme */}
+              <div className="flex items-center space-x-reverse space-x-4">
+                <LanguageToggle />
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>
