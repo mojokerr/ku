@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { 
-  Phone, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle,
-  Instagram, Twitter, Linkedin, Youtube, Globe, Headphones,
-  Calendar, Video, FileText, Download
+import React from 'react';
+import {
+  Phone, Mail, MessageCircle, MapPin, Clock,
+  Instagram, Twitter, Linkedin, Youtube, Globe, Headphones
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from '../utils/translations';
