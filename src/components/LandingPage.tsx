@@ -16,6 +16,7 @@ import ServicesShowcase from './ServicesShowcase';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import CounterAnimation from './CounterAnimation';
+import AnimatedBackground from './AnimatedBackground';
 
 const LandingPage: React.FC = () => {
   // Hooks
