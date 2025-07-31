@@ -589,7 +589,7 @@ const LandingPage: React.FC = () => {
 
                   {/* Features */}
                   <div className="space-y-2 pt-4">
-                    {['تنفيذ فوري', 'أمان عالي', 'دعم 24/7'].map((feature, idx) => (
+                    {['تنفيذ فوري', 'أمان عالي', 'د��م 24/7'].map((feature, idx) => (
                       <div key={idx} className="flex items-center space-x-reverse space-x-2">
                         <CheckSquare className="h-4 w-4 text-green-500" />
                         <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -874,11 +874,13 @@ const LandingPage: React.FC = () => {
       )}
 
       {isServicesOpen && (
-        <ServicesShowcase
-          isOpen={isServicesOpen}
-          onClose={() => setIsServicesOpen(false)}
-          onSelectService={handleOrderService}
-        />
+        <LazyLoadWrapper fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center"><LoadingSpinner size="lg" text="جاري تحميل الخدمات..." /></div>}>
+          <LazyServicesShowcase
+            isOpen={isServicesOpen}
+            onClose={() => setIsServicesOpen(false)}
+            onSelectService={handleOrderService}
+          />
+        </LazyLoadWrapper>
       )}
 
       {/* Video Modal */}
