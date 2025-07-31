@@ -33,6 +33,19 @@ export const translations = {
     successRate: 'معدل النجاح',
     support247: 'دعم متواصل',
     executionSpeed: 'سرعة التنفيذ',
+    satisfied_customers: 'عميل راضٍ',
+    success_rate: 'معدل النجاح',
+    support_hours: 'دعم متواصل',
+    avg_completion_time: 'متوسط وقت الإنجاز',
+    security_title: 'أمان متقدم',
+    security_desc: 'تشفير من الدرجة البنكية وحماية شاملة',
+    speed_title: 'سرعة فائقة',
+    speed_desc: 'معالجة فورية في أقل من 5 دقائق',
+    reliability_title: 'موثوقية عالية',
+    reliability_desc: 'ضمان الجودة والخدمة المتميزة',
+    global_reach: 'تغطية عالمية',
+    global_reach_desc: 'خدماتنا متاحة في أكثر من 150 دولة',
+    testimonials: 'آراء العملاء',
     
     // Services Section
     ourExcellentServices: 'خدماتنا المتميزة',
@@ -49,7 +62,7 @@ export const translations = {
     // Features Section
     whyWeAre: 'لماذا نحن',
     theBest: 'الأفضل؟',
-    featuresDescription: 'نتميز بمجموعة من الخصائص التي تجعلنا الخيار الأول للخدمات المالية الرقمية',
+    featuresDescription: 'نتميز بمجموعة من الخصائص التي تجعلنا الخيار الأول للخد��ات المالية الرقمية',
     advancedSecurity: 'أمان متقدم',
     securityDescription: 'تشفير متقدم وحماية شاملة لجميع معاملاتك المالية',
     lightningSpeed: 'سرعة البرق',
@@ -70,7 +83,7 @@ export const translations = {
     fullySecuredEncrypted: 'آمن ومشفر بالكامل',
     
     // Testimonials
-    whatOur: 'ماذا يقول',
+    whatOur: 'ماذا ي��ول',
     clientsSay: 'عملاؤنا',
     testimonialsDescription: 'آرا�� حقيقية من عملائنا الذين اختبروا خدماتنا المتميزة',
     
