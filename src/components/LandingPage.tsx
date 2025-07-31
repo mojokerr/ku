@@ -16,10 +16,13 @@ import ServicesShowcase from './ServicesShowcase';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import CounterAnimation from './CounterAnimation';
-import AnimatedBackground from './AnimatedBackground';
-import AdvancedTestimonials from './AdvancedTestimonials';
-import ContactSection from './ContactSection';
-import FeatureShowcase from './FeatureShowcase';
+import LazyLoadWrapper, {
+  LazyAnimatedBackground,
+  LazyAdvancedTestimonials,
+  LazyContactSection,
+  LazyFeatureShowcase,
+  LazyServicesShowcase
+} from './LazyLoadWrapper';
 
 const LandingPage: React.FC = () => {
   // Hooks
