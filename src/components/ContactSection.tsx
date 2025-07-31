@@ -15,57 +15,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }) => {
   const { theme, language } = useTheme();
   const { t } = useTranslation(language);
 
-  // State
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-    serviceType: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isNewsletterSubmitted, setIsNewsletterSubmitted] = useState(false);
 
-  // Handle form submission
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-      serviceType: ''
-    });
-
-    setTimeout(() => setIsSubmitted(false), 5000);
-  }, []);
-
-  // Handle newsletter subscription
-  const handleNewsletterSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim()) return;
-
-    setIsNewsletterSubmitted(true);
-    setNewsletterEmail('');
-    setTimeout(() => setIsNewsletterSubmitted(false), 3000);
-  }, [newsletterEmail]);
-
-  // Handle input changes
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }, []);
 
   return (
     <section id="contact" className={`py-20 ${className}`}>
