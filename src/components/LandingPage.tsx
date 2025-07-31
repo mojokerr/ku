@@ -370,75 +370,50 @@ const LandingPage: React.FC = () => {
 
             {/* Visual Element */}
             <div className="relative">
-              {/* Dashboard Preview */}
+              {/* Feature Highlights */}
               <div className={`relative p-8 rounded-3xl shadow-2xl backdrop-blur-sm border transform hover:scale-105 transition-all duration-500 ${
-                theme === 'dark' 
-                  ? 'bg-gray-800/50 border-gray-700/50' 
+                theme === 'dark'
+                  ? 'bg-gray-800/50 border-gray-700/50'
                   : 'bg-white/50 border-gray-200/50'
               }`}>
-                {/* Mini Dashboard */}
                 <div className="space-y-6">
                   {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-reverse space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                        <Shield className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          لوحة التحكم
-                        </h3>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          إدارة شاملة
-                        </p>
-                      </div>
+                  <div className="text-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Shield className="h-8 w-8 text-white" />
                     </div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                    <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                      {t('trusted_platform')}
+                    </h3>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {t('security_title')}
+                    </p>
                   </div>
 
-                  {/* Stats Grid */}
+                  {/* Features Grid */}
                   <div className="grid grid-cols-2 gap-4">
-                    {stats.slice(0, 4).map((stat, index) => (
+                    {[
+                      { icon: Shield, title: t('security_title'), desc: t('security_desc'), color: 'blue' },
+                      { icon: Zap, title: t('speed_title'), desc: t('speed_desc'), color: 'orange' },
+                      { icon: Target, title: t('reliability_title'), desc: t('reliability_desc'), color: 'green' },
+                      { icon: Globe, title: t('global_reach'), desc: t('global_reach_desc'), color: 'purple' }
+                    ].map((feature, index) => (
                       <div key={index} className={`p-4 rounded-xl ${
                         theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-50/50'
                       }`}>
-                        <div className="flex items-center space-x-reverse space-x-2 mb-2">
-                          <stat.icon className="h-4 w-4 text-blue-600" />
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {stat.label}
-                          </span>
-                        </div>
-                        <div className={`text-lg font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          <CounterAnimation
-                            value={stat.value}
-                            prefix={stat.prefix}
-                            suffix={stat.suffix}
-                          />
-                        </div>
+                        <feature.icon className={`h-6 w-6 mb-2 ${
+                          feature.color === 'blue' ? 'text-blue-500' :
+                          feature.color === 'orange' ? 'text-orange-500' :
+                          feature.color === 'green' ? 'text-green-500' : 'text-purple-500'
+                        }`} />
+                        <h4 className={`text-sm font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                          {feature.title}
+                        </h4>
+                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {feature.desc}
+                        </p>
                       </div>
                     ))}
-                  </div>
-
-                  {/* Recent Activity */}
-                  <div className={`p-4 rounded-xl ${
-                    theme === 'dark' ? 'bg-gray-700/30' : 'bg-gray-50/30'
-                  }`}>
-                    <h4 className={`text-sm font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                      النشاط الأخير
-                    </h4>
-                    <div className="space-y-2">
-                      {[1,2,3].map(i => (
-                        <div key={i} className="flex items-center space-x-reverse space-x-3">
-                          <div className="w-2 h-2 bg-green-400 rounded-full" />
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            طلب جديد تم إنجازه بنجاح
-                          </span>
-                          <span className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                            {i}م
-                          </span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
 

@@ -156,7 +156,7 @@ export const translations = {
     pricing: 'Pricing',
     blog: 'Blog',
     help: 'Help',
-    
+
     // Hero Section
     heroTitle: 'Future of Digital',
     heroTitleGradient: 'Financial Services',
@@ -164,12 +164,33 @@ export const translations = {
     heroButton1: 'Start Your Journey',
     heroButton2: 'Explore Services',
     leadingPlatform: 'Leading platform in digital financial services',
-    
+    hero_title: 'Future of Digital',
+    hero_title_gradient: 'Financial Services',
+    hero_subtitle: 'We are redefining digital financial services by providing innovative, secure, and advanced solutions',
+    get_started: 'Get Started',
+    explore_services: 'Explore Services',
+    hero_badge: '🎉 Leading Financial Services Platform',
+    start_now: 'Start Now',
+    trusted_platform: 'Trusted Platform',
+
     // Stats
     satisfiedClients: 'Satisfied Clients',
     successRate: 'Success Rate',
     support247: '24/7 Support',
     executionSpeed: 'Execution Speed',
+    satisfied_customers: 'Satisfied Customers',
+    success_rate: 'Success Rate',
+    support_hours: 'Continuous Support',
+    avg_completion_time: 'Average Completion Time',
+    security_title: 'Advanced Security',
+    security_desc: 'Bank-grade encryption and comprehensive protection',
+    speed_title: 'Lightning Speed',
+    speed_desc: 'Instant processing in less than 5 minutes',
+    reliability_title: 'High Reliability',
+    reliability_desc: 'Quality guarantee and exceptional service',
+    global_reach: 'Global Reach',
+    global_reach_desc: 'Our services are available in 150+ countries',
+    testimonials: 'Testimonials',
     
     // Services Section
     ourExcellentServices: 'Our Excellent Services',
@@ -182,6 +203,7 @@ export const translations = {
     instantProcessing: 'Instant Processing',
     highSecurity: 'High Security',
     support24: '24/7 Support',
+    our_services: 'Our Services',
     
     // Features Section
     whyWeAre: 'Why We Are',
