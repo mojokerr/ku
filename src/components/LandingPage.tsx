@@ -17,6 +17,8 @@ import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import CounterAnimation from './CounterAnimation';
 import AnimatedBackground from './AnimatedBackground';
+import AdvancedTestimonials from './AdvancedTestimonials';
+import ContactSection from './ContactSection';
 
 const LandingPage: React.FC = () => {
   // Hooks
@@ -231,7 +233,7 @@ const LandingPage: React.FC = () => {
       clients: '15000+',
       successRate: '99.9%',
       support: '24/7',
-      speed: '< 5 دقائق'
+      speed: '< 5 دقائ��'
     }
   };
 
