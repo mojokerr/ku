@@ -283,7 +283,9 @@ const LandingPage: React.FC = () => {
       {/* Enhanced Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center pt-20">
         {/* Animated Background */}
-        <AnimatedBackground variant="hero" />
+        <LazyLoadWrapper fallback={<div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-indigo-900/20" />}>
+          <LazyAnimatedBackground variant="hero" />
+        </LazyLoadWrapper>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -351,7 +353,7 @@ const LandingPage: React.FC = () => {
                     ))}
                   </div>
                   <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <span className="font-semibold">15,000+</span> عميل راضٍ
+                    <span className="font-semibold">15,000+</span> عم��ل راضٍ
                   </div>
                 </div>
                 
@@ -458,7 +460,7 @@ const LandingPage: React.FC = () => {
           {heroData.showStats && (
             <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { value: heroData.statsData.clients, label: 'عميل راضٍ', icon: Users },
+                { value: heroData.statsData.clients, label: 'عميل ��اضٍ', icon: Users },
                 { value: heroData.statsData.successRate, label: 'معدل النجاح', icon: Target },
                 { value: heroData.statsData.support, label: 'دعم متواصل', icon: Clock },
                 { value: heroData.statsData.speed, label: 'سرعة التنفيذ', icon: Zap }
@@ -828,7 +830,7 @@ const LandingPage: React.FC = () => {
                   'شروط الاستخدام',
                   'سياسة الأمان',
                   'المساعدة',
-                  'خريطة الموقع'
+                  'خريطة المو��ع'
                 ].map((link, index) => (
                   <a
                     key={index}
