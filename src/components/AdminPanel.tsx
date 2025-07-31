@@ -23,7 +23,7 @@ import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import { useData } from '../context/DataContext';
 
-type TabType = 'dashboard' | 'services' | 'payments' | 'orders' | 'settings' | 'customize' | 'live-editor' | 'analytics' | 'reports' | 'users' | 'backup';
+type TabType = 'dashboard' | 'services' | 'payments' | 'orders' | 'settings' | 'system-settings' | 'security' | 'customize' | 'live-editor' | 'analytics' | 'reports' | 'users' | 'backup';
 
 const AdminPanel: React.FC = () => {
   const { theme } = useTheme();
@@ -73,12 +73,12 @@ const AdminPanel: React.FC = () => {
     { id: 'live-editor' as TabType, name: 'المحرر المباشر', icon: Layout, category: 'content' },
     { id: 'services' as TabType, name: 'إدارة الخدمات', icon: Package, category: 'content' },
     { id: 'orders' as TabType, name: 'الطلبات', icon: Inbox, category: 'operations', badge: orders.filter(o => !o.archived).length },
-    { id: 'users' as TabType, name: 'إ��ارة المستخدمين', icon: Users, category: 'operations' },
+    { id: 'users' as TabType, name: 'إدارة المستخدمين', icon: Users, category: 'operations' },
     { id: 'payments' as TabType, name: 'طرق الدفع', icon: CreditCard, category: 'operations' },
     { id: 'reports' as TabType, name: 'التقارير', icon: FileText, category: 'analytics' },
     { id: 'customize' as TabType, name: 'تخصيص الصفحة', icon: Palette, category: 'settings' },
     { id: 'backup' as TabType, name: 'النسخ الاحتياطي', icon: Download, category: 'settings' },
-    { id: 'settings' as TabType, name: 'إعدادات الموقع', icon: Settings, category: 'settings' },
+    { id: 'settings' as TabType, name: 'إعدادات المو��ع', icon: Settings, category: 'settings' },
   ];
 
   const tabCategories = {
