@@ -8,6 +8,7 @@ import PaymentMethodsManager from './admin/PaymentMethodsManager';
 import OrdersManager from './admin/OrdersManager';
 import SiteSettingsManager from './admin/SiteSettingsManager';
 import LandingPageCustomizer from './admin/LandingPageCustomizer';
+import LiveLandingPageEditor from './admin/LiveLandingPageEditor';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 
